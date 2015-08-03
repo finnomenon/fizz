@@ -2,9 +2,6 @@ require 'socket'
 
 server = TCPServer.new 8000
 
-
-@test = "GET / HTTP/1.1\r\nHost: blah.com\r\n\r\n"
-
 def parser(input)
  posi = 0
  header_collection = {}
