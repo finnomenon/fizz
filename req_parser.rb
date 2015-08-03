@@ -1,3 +1,8 @@
+require 'socket'
+
+server = TCPServer.new 8000
+
+
 @test = "GET / HTTP/1.1\r\nHost: blah.com\r\n\r\n"
 
 def parser(input)
@@ -16,8 +21,8 @@ def parser(input)
  puts "Version: #{parsed_version[1]}"
  posi = parsed_version[0]
 
- parsed_headers = headers(posi)
- posi = parsed_headers[0]
+# parsed_headers = headers(posi)
+# posi = parsed_headers[0]
 end
 
 
@@ -105,5 +110,9 @@ def is_line_empty?(start_posi)
  end
 end
 
-puts @test
-parser(@test)
+loop do
+ client = server.accept
+ @test = client.gets
+ parser(@test)
+end
+
