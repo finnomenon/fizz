@@ -21,8 +21,8 @@ def parser(input)
  puts "Version: #{parsed_version[1]}"
  posi = parsed_version[0]
 
-# parsed_headers = headers(posi)
-# posi = parsed_headers[0]
+ parsed_headers = headers(posi)
+ posi = parsed_headers[0]
 end
 
 
@@ -112,7 +112,9 @@ end
 
 loop do
  client = server.accept
- @test = client.gets
+ @test = ""
+ while line = client.gets
+  @test << line
+ end
  parser(@test)
 end
-
